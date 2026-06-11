@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>下一站- 韓日港</title>
+
+<style>
+
+:root{
+    --main:#8E7C6D;
+    --sub:#B7A89A;
+    --bg:#F5F1ED;
+}
+
+body{
+    margin:0;
+    font-family:"Microsoft JhengHei",sans-serif;
+    background:var(--bg);
+    font-size:18px;
+}
+
+header{
+    background:linear-gradient(135deg,#9A8C98,#B7A89A);
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+.container{
+    display:grid;
+    grid-template-columns:250px 1fr;
+    min-height:90vh;
+}
+
+/* 左側選單 */
+
+.sidebar{
+    background:white;
+    border-right:3px solid #ddd;
+    padding:20px;
+}
+
+.sidebar h2{
+    color:var(--main);
+}
+
+.menu-item{
+    background:var(--sub);
+    color:white;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.menu-item:hover{
+    background:var(--main);
+}
+
+/* 右側內容 */
+
+.content{
+    padding:30px;
+}
+
+.section{
+    display:none;
+}
+
+.section.active{
+    display:block;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+    margin-bottom:20px;
+}
+
+img{
+    width:100%;
+    max-width:700px;
+    border-radius:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:15px;
+}
+
+th{
+    background:#8E7C6D;
+    color:white;
+    padding:15px;
+}
+
+td{
+    padding:15px;
+    text-align:center;
+    background:#FAF8F6;
+}
+
+tr:nth-child(even) td{
+    background:#F0EBE6;
+}
+
+table,th,td{
+    border:1px solid #D8CEC5;
+}
+
+canvas{
+    border:none;
+}
+
+.country-image{
+    width:100%;
+    max-width:900px;
+    display:block;
+    margin:20px auto;
+    border-radius:15px;
+}
+
+audio{
+    width:100%;
+    margin-top:10px;
+}
+
+iframe{
+    width:100%;
+    border:none;
+    border-radius:15px;
+}
+
+p{
+    font-size:20px;
+    line-height:1.8;
+}
+
+h2{
+    font-size:32px;
+}
+
+h3{
+    font-size:24px;
+}
+
+.menu-item{
+    font-size:20px;
+}
+
+table{
+    font-size:18px;
+}
+
+.survey-layout{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:30px;
+}
+
+.survey-form{
+    flex:1;
+}
+
+.survey-plane{
+    width:400px;
+    transform:translateX(100px);
+}
+
+.info-list{
+    font-size:20px;
+    line-height:2;
+    margin-bottom:25px;
+}
+
+.spot-gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.spot-gallery figure{
+    margin:0;
+}
+
+.spot-gallery img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:15px;
+    transition:.3s;
+}
+
+.spot-gallery img:hover{
+    transform:scale(1.03);
+}
+
+.spot-gallery figcaption{
+    text-align:center;
+    margin-top:8px;
+    color:#666;
+    font-size:16px;
+}
+
+.spot-gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:20px;
+}
+
+.spot-gallery img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:12px;
+    transition:.3s ease;
+}
+
+.spot-gallery img:hover{
+    transform:scale(1.03);
+    filter:brightness(1.04);
+}
+
+.spot-gallery figcaption{
+    text-align:center;
+    font-size:14px;
+    color:#666;
+    margin-top:5px;
+}
+
+.title-desc{
+    font-size:18px;
+    font-weight:normal;
+    color:#666;
+}
+
+.food-gallery{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:25px;
+    margin-top:20px;
+}
+
+.food-card{
+    width:180px;
+    text-align:center;
+}
+
+.food-card img{
+    width:180px;
+    height:120px;
+    object-fit:cover;
+    border-radius:12px;
+    box-shadow:0 3px 8px rgba(0,0,0,.15);
+    transition:.3s ease;
+}
+
+.food-card img:hover{
+    transform:scale(1.03);
+    filter:brightness(1.04);
+}
+
+.food-card p{
+    margin-top:10px;
+    font-size:18px;
+    color:#555;
+}
+
+input[type="text"],
+input[type="email"]{
+    width:200px;
+    height:30px;
+    font-size:18px;
+    padding:6px 10px;
+    border-radius:8px;
+}
+
+select{
+    width:120px;
+    height:30px;
+    font-size:18px;
+    border-radius:8px;
+}
+
+textarea{
+    width:95%;
+    max-width:1000px;
+    height:180px;
+    font-size:18px;
+    padding:12px;
+    border-radius:8px;
+    box-sizing:border-box;
+}
+
+input[type="submit"]{
+    width:140px;
+    height:50px;
+    font-size:20px;
+    border:none;
+    border-radius:10px;
+    background:#8E7C6D;
+    color:white;
+    cursor:pointer;
+}
+
+.video-link{
+    display:inline-block;
+    margin-top:15px;
+    color:#8E7C6D;
+    font-size:18px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.video-link:hover{
+    color:#B7A89A;
+}
+
+input,
+select,
+textarea{
+    transition:all 0.3s ease;
+}
+
+input:hover,
+select:hover,
+textarea:hover{
+    transform:scale(1.03);
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    transform:scale(1.05);
+    outline:none;
+    border-color:#8E7C6D;
+    box-shadow:0 0 12px rgba(142,124,109,0.35);
+}
+
+.song-title{
+    font-size:20px;
+    font-weight:bold;
+    color:#8E7C6D;
+    margin-bottom:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>✈ 下一站- 韓日港 ✈</h1>
+<p>探索韓國、日本與香港的旅遊魅力</p>
+</header>
+
+<div class="container">
+
+<!-- 左側 -->
+
+<div class="sidebar">
+
+<h2>旅遊選單</h2>
+
+<div class="menu-item" onclick="showSection('home')">
+🏠 首頁
+</div>
+
+<div class="menu-item" onclick="showSection('korea')">
+🇰🇷 韓國
+</div>
+
+<div class="menu-item" onclick="showSection('japan')">
+🇯🇵 日本
+</div>
+
+<div class="menu-item" onclick="showSection('hongkong')">
+🇭🇰 香港
+</div>
+
+<div class="menu-item" onclick="showSection('survey')">
+📝 留言功能
+</div>
+
+<div class="card">
+
+🌏 旅遊資源連結
+
+<ul>
+<li><a href="https://www.klook.com" target="_blank">KLOOK</a></li>
+<li><a href="https://www.agoda.com" target="_blank">Agoda</a></li>
+<li><a href="https://www.booking.com" target="_blank">Booking.com</a></li>
+<li><a href="https://www.trip.com" target="_blank">Trip.com</a></li>
+</ul>
+
+</div>
+
+</div>
+
+<!-- 右側 -->
+
+<div class="content">
+
+<!-- 首頁 -->
+
+<div id="home" class="section active">
+    
+    <div class="card"> 
+        <h2>網站介紹</h2> 
+        <p> 隨著國際旅遊逐漸普及，東亞地區因地理位置接近、交通便利及文化特色豐富，成為許多人出國旅遊的首選。 </p> <p> 本網站以韓國、日本及香港為主題，整理各地的旅遊特色與相關資訊，希望讓使用者能快速認識東亞熱門旅遊地區，作為未來旅遊規劃的參考。 
+        </p> 
+    </div>
+
+<div class="card">
+
+<table>
+
+<tr>
+<th>旅遊地區</th>
+<th>推薦景點</th>
+<th>特色</th>
+</tr>
+
+<tr>
+<td>韓國</td>
+<td>北村韓屋村</td>
+<td>K-pop、美食、韓屋</td>
+</tr>
+
+<tr>
+<td>日本</td>
+<td>伏見稻荷大社</td>
+<td>動漫、美食、神社鳥居</td>
+</tr>
+
+<tr>
+<td>香港</td>
+<td>太平山頂</td>
+<td>夜景、美食、叮叮車</td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- 韓國 -->
+
+<div id="korea" class="section">
+
+<div class="card">
+
+<h2>🇰🇷 韓國</h2>
+
+<p>
+韓國是亞洲熱門旅遊國家之一，從充滿歷史氣息的傳統建築，到時尚繁華的都市街區，再到迷人的海岸風景，都展現出韓國多元且獨特的文化魅力。
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+⭐ 景點介紹
+<span class="title-desc">
+－光化門、北村韓屋村與首爾塔分別展現韓國的歷史文化、傳統風貌與現代都市魅力。
+</span>
+</h3>
+
+<div class="spot-box">
+
+<div class="spot-text">
+
+<ul class="info-list">
+<li>光化門－首爾最具代表性的城門，也是景福宮的正門。</li>
+<li>北村韓屋村－保存完整的韓國傳統建築</li>
+<li>首爾塔－熱門購物與美食聚集地</li>
+</ul>
+
+</div>
+
+<div class="spot-gallery">
+
+<figure>
+<img src="光化門.jpg" alt="光化門">
+<figcaption>光化門</figcaption>
+</figure>
+
+<figure>
+<img src="北村韓屋村.jpg" alt="北村韓屋村">
+<figcaption>北村韓屋村</figcaption>
+</figure>
+
+<figure>
+<img src="首爾塔.jpg" alt="首爾塔">
+<figcaption>首爾塔</figcaption>
+</figure>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+    <h3>🍜 美食推薦</h3>
+
+    <div class="food-gallery">
+
+        <div class="food-card">
+            <img src="韓式炸雞.jpg" alt="韓式炸雞">
+            <p>韓式炸雞</p>
+        </div>
+
+        <div class="food-card">
+            <img src="海鮮煎餅.webp" alt="海鮮煎餅">
+            <p>海鮮煎餅</p>
+        </div>
+
+        <div class="food-card">
+            <img src="醬蟹.jpeg" alt="醬蟹">
+            <p>醬蟹</p>
+        </div>
+
+        <div class="food-card">
+            <img src="人蔘雞.jpeg" alt="人蔘雞">
+            <p>人蔘雞</p>
+        </div>
+
+        <div class="food-card">
+            <img src="部隊鍋.jpg" alt="部隊鍋">
+            <p>部隊鍋</p>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+<h3>💡 旅遊小知識</h3>
+
+<p>
+韓國便利商店文化相當發達，許多旅客喜歡在便利商店品嚐泡麵與特色點心。
+春季櫻花與秋季楓葉也是韓國熱門的旅遊季節。
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🎵 韓國推薦音樂</h3>
+
+<p class="song-title">IU－Bye Summer</p>
+
+<audio controls>
+<source src="IU - 바이, 썸머.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<div class="card">
+
+<h3>🎥 韓國旅遊影片</h3>
+
+<iframe
+width="100%"
+height="450"
+src="https://www.youtube.com/embed/uQ7m9WdoE1k"
+title="韓國旅遊影片"
+allowfullscreen>
+</iframe>
+
+<br><br>
+
+<a
+class="video-link"
+href="https://www.youtube.com/watch?v=uQ7m9WdoE1k"
+target="_blank">
+▶ 點我到 YouTube 觀看完整影片
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>📍 首爾位置</h3>
+
+<iframe
+src="https://www.google.com/maps?q=Seoul&output=embed"
+height="400">
+</iframe>
+
+</div>
+
+</div>
+
+<!-- 日本 -->
+
+<div id="japan" class="section">
+
+<div class="card">
+
+<h2>🇯🇵 日本</h2>
+
+<p>
+日本位於東亞，是一個融合傳統文化與現代科技的國家，四季景色分明，擁有豐富的歷史文化、動漫產業與特色美食，是深受世界各地旅客喜愛的熱門旅遊目的地。
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+⭐ 景點介紹
+<span class="title-desc">
+－富士山、東京鐵塔與熊本城分別展現日本的自然景觀、現代都市風貌與歷史文化特色。
+</span>
+</h3>
+
+<div class="spot-box">
+
+<div class="spot-text">
+
+<ul class="info-list">
+<li>富士山－日本最具代表性的自然景觀</li>
+<li>東京鐵塔－日本的象徵性建築</li>
+<li>熊本城－日本三大名城之一，以雄偉的城堡建築與歷史文化聞名。</li>
+</ul>
+
+</div>
+
+<div class="spot-gallery">
+
+<figure>
+<img src="富士山.jpg" alt="富士山">
+<figcaption>富士山</figcaption>
+</figure>
+
+<figure>
+<img src="東京鐵塔.webp" alt="東京鐵塔">
+<figcaption>東京鐵塔</figcaption>
+</figure>
+
+<figure>
+<img src="熊本城.jpg" alt="熊本城">
+<figcaption>熊本城</figcaption>
+</figure>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+    <h3>🍜 美食推薦</h3>
+
+    <div class="food-gallery">
+
+        <div class="food-card">
+            <img src="拉麵.jpg" alt="拉麵">
+            <p>拉麵</p>
+        </div>
+
+        <div class="food-card">
+            <img src="壽司.jpg" alt="壽司">
+            <p>壽司</p>
+        </div>
+
+        <div class="food-card">
+            <img src="天婦羅.jpeg" alt="天婦羅">
+            <p>天婦羅</p>
+        </div>
+
+        <div class="food-card">
+            <img src="燒肉.jpg" alt="燒肉">
+            <p>燒肉</p>
+        </div>
+
+        <div class="food-card">
+            <img src="壽喜燒.webp" alt="壽喜燒">
+            <p>壽喜燒</p>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+<h3>💡 旅遊小知識</h3>
+
+<p>
+日本是世界上自動販賣機數量最多的國家之一，
+從飲料到冰淇淋都能透過販賣機購買。
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🎵 日本推薦音樂</h3>
+
+<p class="song-title">TENBLANK－Glass Heart</p>
+
+<audio controls>
+<source src="TENBLANK  Glass Heart.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<div class="card">
+
+<h3>🎥 日本旅遊影片</h3>
+
+<iframe
+width="100%"
+height="450"
+src="https://www.youtube.com/embed/Ha2Ue04NpWo"
+title="日本旅遊影片"
+allowfullscreen>
+</iframe>
+
+<br><br>
+
+<a
+class="video-link"
+href="https://www.youtube.com/watch?v=Ha2Ue04NpWo"
+target="_blank">
+▶ 點我到 YouTube 觀看完整影片
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>📍 東京位置</h3>
+
+<iframe
+src="https://www.google.com/maps?q=Tokyo&output=embed"
+height="400">
+</iframe>
+
+</div>
+
+</div>
+
+
+<!-- 香港 -->
+
+<div id="hongkong" class="section">
+
+<div class="card">
+
+<h2>🇭🇰 香港</h2>
+
+<p>
+香港是亞洲重要的國際都市，融合中西文化特色，擁有繁華的城市景觀、多元的美食文化與便利的交通環境，是許多旅客喜愛的觀光與購物勝地。
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>
+⭐ 景點介紹
+<span class="title-desc">
+－太平山頂、維多利亞港與海濱長廊展現香港繁華的都市景觀與迷人的海港風情。
+</span>
+</h3>
+
+<div class="spot-box">
+
+<div class="spot-text">
+
+<ul class="info-list">
+<li>維多利亞港－香港最具代表性的夜景地標</li>
+<li>太平山頂－俯瞰香港全景的絕佳位置</li>
+<li>海濱長廊－沿著維港散步，欣賞天際線與海景</li>
+</ul>
+
+</div>
+
+<div class="spot-gallery">
+
+<figure>
+<img src="維多利亞港-1.jpg" alt="維多利亞港">
+<figcaption>維多利亞港</figcaption>
+</figure>
+
+<figure>
+<img src="太平山頂.jpg" alt="太平山頂">
+<figcaption>太平山頂</figcaption>
+</figure>
+
+<figure>
+<img src="海濱長廊.jpg" alt="海濱長廊">
+<figcaption>海濱長廊</figcaption>
+</figure>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+    <h3>🍜 美食推薦</h3>
+
+    <div class="food-gallery">
+
+        <div class="food-card">
+            <img src="港式飲茶.jpeg" alt="港式飲茶">
+            <p>港式飲茶</p>
+        </div>
+
+        <div class="food-card">
+            <img src="叉燒飯.jpg" alt="叉燒飯">
+            <p>叉燒飯</p>
+        </div>
+
+        <div class="food-card">
+            <img src="茶餐廳.jpg" alt="茶餐廳">
+            <p>茶餐廳</p>
+        </div>
+
+        <div class="food-card">
+            <img src="富豪雪糕車.webp" alt="富豪雪糕車">
+            <p>富豪雪糕車</p>
+        </div>
+
+        <div class="food-card">
+            <img src="蛋塔.jpg" alt="蛋塔">
+            <p>蛋塔</p>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card">
+
+<h3>💡 旅遊小知識</h3>
+
+<p>
+香港被譽為「美食天堂」，
+除了港式飲茶外，街頭小吃也深受遊客喜愛。
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🎵 香港推薦音樂</h3>
+
+<p class="song-title">陳奕迅－富士山下</p>
+
+<audio controls>
+<source src="富士山下.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<div class="card">
+
+<h3>🎥 香港旅遊影片</h3>
+
+<iframe
+width="100%"
+height="450"
+src="https://www.youtube.com/embed/tUsS720VBU0"
+title="香港旅遊影片"
+allowfullscreen>
+</iframe>
+
+<br><br>
+
+<a
+class="video-link"
+href="https://www.youtube.com/watch?v=tUsS720VBU0"
+target="_blank">
+▶ 點我到 YouTube 觀看完整影片
+</a>
+
+</div>
+
+<div class="card">
+
+<h3>📍 香港位置</h3>
+
+<iframe
+src="https://www.google.com/maps?q=Hong+Kong&output=embed"
+height="400">
+</iframe>
+
+</div>
+
+</div>
+
+
+<!-- 問卷 -->
+
+
+<div id="survey" class="section">
+
+    <div class="card survey-layout">
+
+        <div class="survey-form">
+
+            <h2>📝 留言功能</h2>
+
+            <p>
+            歡迎分享您對東亞旅遊的想法與建議！
+            </p>
+
+            <form
+            action="mailto:41211148@gcloud.csu.edu.tw"
+            method="post"
+            enctype="text/plain">
+
+                姓名：
+                <input type="text" name="name">
+
+                <br><br>
+
+                Email：
+                <input
+                type="email"
+                name="email">
+
+                <br><br>
+
+                最想去的國家：
+
+                <select name="country">
+                    <option>韓國</option>
+                    <option>日本</option>
+                    <option>香港</option>
+                    <option>其他</option>
+                </select>
+
+                <br><br>
+
+                留言內容：
+
+                <br><br>
+
+                <textarea
+                name="message"
+                rows="6"
+                cols="50"
+                placeholder="請輸入您的留言內容"></textarea>
+
+                <br><br>
+
+                <input
+                type="submit"
+                value="送出留言">
+
+            </form>
+
+        </div>
+
+        <div class="survey-plane">
+
+            <canvas
+            id="planeCanvas"
+            width="450"
+            height="450">
+            </canvas>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+
+function showSection(id){ 
+    let sections=document.querySelectorAll(".section"); 
+
+
+    sections.forEach(section=>{ 
+    section.classList.remove("active"); }); 
+
+
+    document.getElementById(id).classList.add("active"); 
+    
+    } 
+    
+    const planeCanvas = document.getElementById("planeCanvas");
+
+if(planeCanvas){
+
+const ctx = planeCanvas.getContext("2d");
+
+// 飛機主體顏色
+ctx.fillStyle="#8E7C6D";
+
+// 飛機主體
+ctx.fillStyle="#8E7C6D";
+ctx.fillRect(80,110,120,20);
+
+// 機頭
+ctx.beginPath();
+ctx.moveTo(200,110);
+ctx.lineTo(240,120);
+ctx.lineTo(200,130);
+ctx.fill();
+
+// 上機翼
+ctx.beginPath();
+ctx.moveTo(120,110);
+ctx.lineTo(150,70);
+ctx.lineTo(165,70);
+ctx.lineTo(145,110);
+ctx.fill();
+
+// 下機翼
+ctx.beginPath();
+ctx.moveTo(120,130);
+ctx.lineTo(150,170);
+ctx.lineTo(165,170);
+ctx.lineTo(145,130);
+ctx.fill();
+
+// 尾翼
+ctx.beginPath();
+ctx.moveTo(80,110);
+ctx.lineTo(60,85);
+ctx.lineTo(75,85);
+ctx.lineTo(95,110);
+ctx.fill();
+
+// 文字
+ctx.font="20px Microsoft JhengHei";
+ctx.fillStyle="#555";
+ctx.fillText("Let's Travel ✈",70,220);
+
+}
+
+</script> 
+    
+</body> 
+</html>
